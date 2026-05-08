@@ -130,7 +130,7 @@
 
         /* 照片区域 */
         .photo-section {
-            display: none;
+            display: none; /* 初始隐藏 */
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
@@ -156,7 +156,7 @@
 
         /* 文字区域 */
         .message {
-            display: none;
+            display: none; /* 初始隐藏 */
             max-width: 600px;
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
@@ -182,57 +182,47 @@
         .hidden {
             display: none !important;
         }
+
         #startScreen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;   /* 水平居中 */
-}
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-#startScreen .btn {
-    margin-top: 40px;
-}
-/* ===== 手机端适配（不影响电脑）===== */
-@media screen and (max-width: 768px) {
+        #startScreen .btn {
+            margin-top: 40px;
+        }
 
-    /* 标题缩小一点，防止溢出 */
-    .title {
-        font-size: 2.2rem;
-        padding: 0 15px;
-    }
-
-    /* 按钮宽度自适应 */
-    .btn {
-        padding: 12px 35px;
-        font-size: 1.2rem;
-    }
-
-    /* 照片框在手机上更合理 */
-    .photo-frame {
-        width: 90vw;
-        height: 65vh;
-    }
-
-    /* 文字区域 */
-    .message {
-        width: 90vw;
-        padding: 20px;
-    }
-
-    .message h2 {
-        font-size: 1.5rem;
-    }
-
-    .message p {
-        font-size: 1rem;
-    }
-}
+        /* ===== 手机端适配（不影响电脑）===== */
+        @media screen and (max-width: 768px) {
+            .title {
+                font-size: 2.2rem;
+                padding: 0 15px;
+            }
+            .btn {
+                padding: 12px 35px;
+                font-size: 1.2rem;
+            }
+            .photo-frame {
+                width: 90vw;
+                height: 65vh;
+            }
+            .message {
+                width: 90vw;
+                padding: 20px;
+            }
+            .message h2 {
+                font-size: 1.5rem;
+            }
+            .message p {
+                font-size: 1rem;
+            }
+        }
     </style>
-
 </head>
 <body>
     <div class="background"></div>
     <div class="overlay"></div>
-
     <div class="flowers-container" id="flowersContainer"></div>
 
     <div class="container">
@@ -253,12 +243,12 @@
         <!-- 文字区域 -->
         <div class="message" id="message">
             <h2>💝 给最爱的妈妈 💝</h2>
-            <p>
+            
                 在这个母亲节<br><br>
                 祝你强壮，祝你挺拔<br><br>
                 祝你平安，祝你万事胜意<br><br>
                 感恩不止今天，愿爱永伴岁月<br><br>
-            </p>
+            
             <button class="btn" style="margin-top: 20px;" onclick="restart()">再看一遍</button>
         </div>
     </div>
@@ -294,6 +284,7 @@
 
         function goToPhotos() {
             document.getElementById('startScreen').classList.add('hidden');
+            // 修改点1：统一使用 style.display 控制显隐，避免冲突
             document.getElementById('photoSection').style.display = 'flex';
             updatePhoto();
         }
@@ -304,20 +295,19 @@
 
         function nextStep() {
             currentPhotoIndex++;
+            // 修改点2：逻辑优化，如果没到最后一张就更新图片，到了最后一张才显示文字
             if (currentPhotoIndex < momPhotos.length) {
                 updatePhoto();
             } else {
-                // 照片看完，显示文字
-                document.getElementById('photoSection').classList.add('hidden');
+                document.getElementById('photoSection').style.display = 'none';
                 document.getElementById('message').style.display = 'block';
             }
         }
 
         function restart() {
-            // 重置状态，回到首页
             currentPhotoIndex = 0;
-            document.getElementById('message').classList.add('hidden');
-            document.getElementById('photoSection').classList.add('hidden');
+            document.getElementById('message').style.display = 'none';
+            document.getElementById('photoSection').style.display = 'none';
             document.getElementById('startScreen').classList.remove('hidden');
         }
 
