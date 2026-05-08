@@ -191,6 +191,41 @@
 #startScreen .btn {
     margin-top: 40px;
 }
+/* ===== 手机端适配（不影响电脑）===== */
+@media screen and (max-width: 768px) {
+
+    /* 标题缩小一点，防止溢出 */
+    .title {
+        font-size: 2.2rem;
+        padding: 0 15px;
+    }
+
+    /* 按钮宽度自适应 */
+    .btn {
+        padding: 12px 35px;
+        font-size: 1.2rem;
+    }
+
+    /* 照片框在手机上更合理 */
+    .photo-frame {
+        width: 90vw;
+        height: 65vh;
+    }
+
+    /* 文字区域 */
+    .message {
+        width: 90vw;
+        padding: 20px;
+    }
+
+    .message h2 {
+        font-size: 1.5rem;
+    }
+
+    .message p {
+        font-size: 1rem;
+    }
+}
     </style>
 
 </head>
